@@ -16,22 +16,12 @@ function validar_nombre_usuario() {
     var nombre_usuario = document.getElementById("input-nombre-usuario").value;
     var div_error = document.getElementById("error-nombre-usuario");
     console.log("Validando nombre de usuario:", nombre_usuario);
+
     if (nombre_usuario === "") {
         div_error.innerHTML = "El nombre de usuario es obligatorio";
         div_error.className = "text-danger small";
         return false;
-    } else {
-        div_error.innerHTML = "";
-        return true;
-    }
-}
-
-function validar_nombre_usuario() {
-    var nombre_usuario = document.getElementById("input-nombre-usuario").value;
-    var div_error = document.getElementById("error-nombre-usuario");
-    console.log("Validando nombre de usuario:", nombre_usuario);
-    
-    if (nombre_usuario.length < 3) {
+    } else if (nombre_usuario.length < 5) {
         div_error.innerHTML = "El nombre es demasiado corto";
         div_error.className = "text-danger small";
         return false;
@@ -67,7 +57,7 @@ function validar_nombre_usuario() {
     div_error.innerHTML = "";
     return true;
 }
-    
+
 
 function validar_contraseña() {
     var nombre_usuario = document.getElementById("input-nombre-usuario").value;
@@ -81,12 +71,12 @@ function validar_contraseña() {
         return false;
     }
     
-    if (contraseña.length < 6) {
+    if (contraseña.length < 3) {
         div_error.innerHTML = "La contraseña es demasiado corta";
         div_error.className = "text-danger small";
         return false;
-    } else if (contraseña.length > 12) {
-        div_error.innerHTML = "La contraseña no puede tener más de 12 caracteres";
+    } else if (contraseña.length > 6) {
+        div_error.innerHTML = "La contraseña no puede tener más de 6 caracteres";
         div_error.className = "text-danger small";
         return false;
     }
