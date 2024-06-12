@@ -79,15 +79,51 @@ function validar_contraseña() {
         div_error.innerHTML = "La contraseña es obligatoria";
         div_error.className = "text-danger small";
         return false;
-    } else if (contraseña.indexOf(nombre_usuario) !== -1) {
-        div_error.innerHTML = "La contraseña no puede repetirse con el nombre de usuario";
+    }
+    
+    if (contraseña.length < 6) {
+        div_error.innerHTML = "La contraseña es demasiado corta";
         div_error.className = "text-danger small";
         return false;
-    } else {
-        div_error.innerHTML = "";
-        return true;
+    } else if (contraseña.length > 12) {
+        div_error.innerHTML = "La contraseña no puede tener más de 12 caracteres";
+        div_error.className = "text-danger small";
+        return false;
     }
+    
+    var tiene_letra = false;
+    var tiene_numero = false;
+    for (var i = 0; i < contraseña.length; i++) {
+        var char = contraseña.charAt(i);
+        if (isNaN(char)) {
+            tiene_letra = true;
+        } else {
+            tiene_numero = true;
+        }
+    }
+    
+    if (!tiene_letra) {
+        div_error.innerHTML = "La contraseña debe contener al menos una letra";
+        div_error.className = "text-danger small";
+        return false;
+    }
+    
+    if (!tiene_numero) {
+        div_error.innerHTML = "La contraseña debe contener al menos un número";
+        div_error.className = "text-danger small";
+        return false;
+    }
+    
+    if (contraseña.indexOf(nombre_usuario) !== -1) {
+        div_error.innerHTML = "La contraseña no puede contener el nombre de usuario";
+        div_error.className = "text-danger small";
+        return false;
+    }
+    
+    div_error.innerHTML = "";
+    return true;
 }
+
 
 function validar_confirmar_contraseña() {
     var contraseña = document.getElementById("input-contraseña").value;
