@@ -26,6 +26,49 @@ function validar_nombre_usuario() {
     }
 }
 
+function validar_nombre_usuario() {
+    var nombre_usuario = document.getElementById("input-nombre-usuario").value;
+    var div_error = document.getElementById("error-nombre-usuario");
+    console.log("Validando nombre de usuario:", nombre_usuario);
+    
+    if (nombre_usuario.length < 3) {
+        div_error.innerHTML = "El nombre es demasiado corto";
+        div_error.className = "text-danger small";
+        return false;
+    } else if (nombre_usuario.length > 10) {
+        div_error.innerHTML = "El nombre no puede tener más de 10 caracteres";
+        div_error.className = "text-danger small";
+        return false;
+    }
+  
+    var tiene_letra = false;
+    var tiene_numero = false;
+    for (var i = 0; i < nombre_usuario.length; i++) {
+        var char = nombre_usuario.charAt(i);
+        if (isNaN(char)) {
+            tiene_letra = true;
+        } else {
+            tiene_numero = true;
+        }
+    }
+    
+    if (!tiene_letra) {
+        div_error.innerHTML = "El nombre debe contener al menos una letra";
+        div_error.className = "text-danger small";
+        return false;
+    }
+    
+    if (!tiene_numero) {
+        div_error.innerHTML = "El nombre debe contener al menos un número";
+        div_error.className = "text-danger small";
+        return false;
+    }
+    
+    div_error.innerHTML = "";
+    return true;
+}
+    
+
 function validar_contraseña() {
     var nombre_usuario = document.getElementById("input-nombre-usuario").value;
     var contraseña = document.getElementById("input-contraseña").value;
